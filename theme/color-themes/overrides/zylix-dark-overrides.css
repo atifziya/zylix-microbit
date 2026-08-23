@@ -1,0 +1,68 @@
+#simulator .editor-sidebar .filemenu {
+    --pxt-focus-border: #6366F1;
+}
+
+/* Simulator play button */
+#simulator #editorSidebar .simtoolbar .ui.icon.tiny.buttons .ui.button.play-button.play .icon.play {
+    color: var(--pxt-colors-green-background) !important;
+}
+
+#simulator .ui.button.play-button .icon.play {
+    color: var(--pxt-colors-green-background) !important;
+}
+
+/* Theme preview */
+.theme-preview-zylix-dark .theme-preview-sim-button {
+    background-color: var(--pxt-neutral-background2) !important;
+}
+
+/* Dark editor/file backgrounds */
+#filelist,
+#editortools {
+    background: var(--pxt-neutral-background1) !important;
+    color: var(--pxt-neutral-foreground1) !important;
+}
+
+/* Blockly flyout */
+path.blocklyFlyoutBackground {
+    fill: #111827 !important;
+}
+
+.monacoFlyout {
+    background: #111827 !important;
+}
+
+/* Simulator sidebar */
+#simulator .editor-sidebar .filemenu {
+    background: var(--pxt-secondary-background);
+    color: var(--pxt-secondary-foreground);
+}
+
+#simulator .editor-sidebar .filemenu .item:hover,
+#simulator .editor-sidebar .filemenu .link.item:hover {
+    background: var(--pxt-secondary-background-hover) !important;
+    color: var(--pxt-secondary-foreground-hover) !important;
+}
+
+/* Simulator toolbar buttons */
+.simtoolbar .ui.button.icon {
+    background-color: var(--pxt-neutral-background2);
+    color: var(--pxt-neutral-foreground2);
+    border-color: var(--pxt-neutral-stencil2);
+}
+
+.simtoolbar .ui.button.icon:hover {
+    filter: none;
+    background-color: var(--pxt-neutral-background2-hover);
+    color: var(--pxt-neutral-foreground2);
+}
+
+/* Serial preview */
+#serialPreview .label {
+    border-color: var(--pxt-primary-background);
+}
+
+/* Dark modal overlay */
+.ui.dimmer {
+    background-color: rgba(11, 16, 32, 0.72) !important;
+}

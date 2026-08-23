@@ -1,9 +1,9 @@
 {
     "id": "microbit",
     "nickname": "microbit",
-    "name": "makecode.microbit.org",
-    "title": "Microsoft MakeCode for micro:bit",
-    "description": "A Blocks / JavaScript code editor for the micro:bit powered by Microsoft MakeCode.",
+    "name": "zylixcode.cloud",
+    "title": "ZylixCode Cloud",
+    "description": "A Blocks / JavaScript code editor for the micro:bit powered by ZylixCode Cloud.",
     "corepkg": "core",
     "bundleddirs": [
         "libs/core",
@@ -34,45 +34,13 @@
             "Microsoft/pxt-neopixel"
         ],
         "githubPackages": true,
-        "cloudProviders": {
-            "github": {
-                "id": "github",
-                "name": "GitHub",
-                "icon": "/static/providers/github-mark.png",
-                "identity": false,
-                "order": 3
-            },
-            "microsoft": {
-                "id": "microsoft",
-                "name": "Microsoft",
-                "icon": "/static/providers/microsoft-logo.svg",
-                "identity": true,
-                "redirect": true,
-                "order": 1
-            },
-            "google": {
-                "id": "google",
-                "name": "Google",
-                "icon": "/static/providers/google-logo.svg",
-                "identity": true,
-                "redirect": true,
-                "order": 2
-            },
-            "clever": {
-                "id": "clever",
-                "name": "Clever",
-                "icon": "/static/providers/clever-logo.png",
-                "identity": true,
-                "redirect": true,
-                "order": 3
-            }
-        }
+        "cloudProviders": {}
     },
     "compile": {
         "isNative": false,
         "hasHex": true,
         "deployDrives": "(MICROBIT|MBED)",
-        "driveName": "MICROBIT",
+        "driveName": "ZYLIXCODE",
         "hexMimeType": "application/x-microbit-hex",
         "openocdScript": "source [find interface/cmsis-dap.cfg]; source [find target/nrf51.cfg]",
         "flashUsableEnd": 242688,
@@ -183,7 +151,7 @@
         "mbdal",
         "mbcodal"
     ],
-    "alwaysMultiVariant" : true,
+    "alwaysMultiVariant": true,
     "variants": {
         "mbdal": {
             "compile": {},
@@ -346,12 +314,10 @@
                 "bluetooth",
                 "thermometer",
                 "compass",
-
                 "builtinspeaker",
                 "microphone",
                 "logotouch",
                 "flashlog",
-
                 "v2"
             ],
             "pinStyles": {
@@ -390,17 +356,17 @@
     },
     "appTheme": {
         "accentColor": "#5C005C",
-        "logoUrl": "https://microbit.org/",
+        "logoUrl": "#",
         "logo": "./static/logo.portrait.white.svg",
         "docsLogo": "./static/logo.square.white.svg",
         "portraitLogo": "./static/logo.square.white.svg",
         "footerLogo": "./static/logo.portrait.black.svg",
         "cardLogo": "./static/icons/apple-touch-icon.png",
         "appLogo": "./static/icons/apple-touch-icon.png",
-        "organization": "Microsoft MakeCode",
-        "organizationUrl": "https://makecode.com/",
-        "organizationLogo": "./static/Microsoft_logo_rgb_W-white_D-square.png",
-        "organizationWideLogo": "./static/Microsoft_logo_rgb_W-white_D.png",
+        "organization": "ZylixCode Cloud",
+        "organizationUrl": "#",
+        "organizationLogo": "",
+        "organizationWideLogo": "",
         "homeScreenHero": {
             "imageUrl": "/static/herogallery/hero-banner.png",
             "name": "Flashing Heart",
@@ -409,18 +375,17 @@
             "cardType": "tutorial"
         },
         "homeScreenHeroGallery": "/hero-banner",
-        "homeUrl": "https://makecode.microbit.org/",
-        "embedUrl": "https://makecode.microbit.org/",
-        "shareUrl": "https://makecode.microbit.org/",
-        "privacyUrl": "https://makecode.com/privacy",
-        "termsOfUseUrl": "https://makecode.com/termsofuse",
-        "githubUrl": "https://github.com/Microsoft/pxt-microbit",
+        "homeUrl": "/",
+        "embedUrl": "/",
+        "shareUrl": "/",
+        "privacyUrl": "https://www.zylixcodecloud.in/",
+        "termsOfUseUrl": "https://www.zylixcodecloud.in/",
+        "githubUrl": "https://github.com/AtifZiya/pxt-microbit",
         "boardName": "micro:bit",
         "boardNickname": "micro:bit",
-        "driveDisplayName": "MICROBIT",
+        "driveDisplayName": "ZYLIXCODE",
         "appStoreID": "1092687276",
         "mobileSafariDownloadProtocol": "microbithex://?data",
-        "crowdinProject": "makecode",
         "extendEditor": true,
         "extendFieldEditors": true,
         "enableTrace": true,
@@ -449,7 +414,7 @@
         "docMenu": [
             {
                 "name": "Support",
-                "path": "https://support.microbit.org/"
+                "path": "https://www.zylixcodecloud.in/"
             },
             {
                 "name": "Reference",
@@ -461,7 +426,7 @@
             },
             {
                 "name": "Buy",
-                "path": "https://microbit.org/buy/"
+                "path": "https://www.zylixcodecloud.in/"
             }
         ],
         "hasReferenceDocs": true,
@@ -471,12 +436,6 @@
         "coloredToolbox": true,
         "monacoToolbox": true,
         "hasAudio": true,
-        "socialOptions": {
-            "orgTwitterHandle": "MSMakeCode",
-            "hashtags": "MakeCode",
-            "discourse": "https://forum.makecode.com/",
-            "discourseCategory": "micro:bit"
-        },
         "blocklyOptions": {
             "grid": {
                 "spacing": 45,
@@ -495,7 +454,7 @@
             "functions": "#3455DB",
             "arrays": "#E65722"
         },
-        "defaultColorTheme": "microbit-light",
+        "defaultColorTheme": "zylix-dark",
         "highContrastColorTheme": "pxt-high-contrast",
         "blocksCollapsing": true,
         "highContrast": true,
@@ -581,16 +540,17 @@
         "immersiveReader": true,
         "tutorialCodeValidation": true,
         "downloadDialogTheme": {
-            "webUSBDeviceNames": ["BBC micro:bit CMSIS-DAP", "DAPLink CMSIS-DAP"],
+            "webUSBDeviceNames": [
+                "BBC micro:bit CMSIS-DAP",
+                "DAPLink CMSIS-DAP"
+            ],
             "minimumFirmwareVersion": "0249",
             "deviceIcon": "xicon microbit",
             "deviceSuccessIcon": "xicon microbit-check",
-
-            "downloadMenuHelpURL" : "/device/usb",
-            "downloadHelpURL" : "/device/usb",
+            "downloadMenuHelpURL": "/device/usb",
+            "downloadHelpURL": "/device/usb",
             "troubleshootWebUSBHelpURL": "/device/usb/webusb/troubleshoot",
             "incompatibleHardwareHelpURL": "/device/v2",
-
             "dragFileImage": "/static/download/transfer.png",
             "connectDeviceImage": "/static/download/connect-microbit.gif",
             "disconnectDeviceImage": "/static/download/full-reset.gif",

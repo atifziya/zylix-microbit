@@ -1,0 +1,136 @@
+{
+    "id": "zylix-dark",
+    "name": "ZylixCode Dark",
+    "weight": 20,
+    "overrideFiles": [
+    "/overrides/zylix-dark-overrides.css"
+  ],
+    "colors": {
+        "pxt-header-background": "#0B1020",
+        "pxt-header-foreground": "#F8FAFC",
+        "pxt-header-background-hover": "#172033",
+        "pxt-header-foreground-hover": "#FFFFFF",
+        "pxt-header-stencil": "#273449",
+
+        "pxt-primary-background": "#6366F1",
+        "pxt-primary-foreground": "#FFFFFF",
+        "pxt-primary-background-hover": "#4F46E5",
+        "pxt-primary-foreground-hover": "#FFFFFF",
+        "pxt-primary-accent": "#8B5CF6",
+
+        "pxt-secondary-background": "#172033",
+        "pxt-secondary-foreground": "#F8FAFC",
+        "pxt-secondary-background-hover": "#273449",
+        "pxt-secondary-foreground-hover": "#FFFFFF",
+        "pxt-secondary-accent": "#6366F1",
+
+        "pxt-tertiary-background": "#111827",
+        "pxt-tertiary-foreground": "#F8FAFC",
+        "pxt-tertiary-background-hover": "#172033",
+        "pxt-tertiary-foreground-hover": "#FFFFFF",
+        "pxt-tertiary-accent": "#8B5CF6",
+
+        "pxt-target-background1": "#0B1020",
+        "pxt-target-foreground1": "#F8FAFC",
+        "pxt-target-background1-hover": "#111827",
+        "pxt-target-foreground1-hover": "#FFFFFF",
+        "pxt-target-stencil1": "#273449",
+
+        "pxt-target-background2": "#111827",
+        "pxt-target-foreground2": "#F8FAFC",
+        "pxt-target-background2-hover": "#172033",
+        "pxt-target-foreground2-hover": "#FFFFFF",
+        "pxt-target-stencil2": "#273449",
+
+        "pxt-target-background3": "#172033",
+        "pxt-target-foreground3": "#F8FAFC",
+        "pxt-target-background3-hover": "#273449",
+        "pxt-target-foreground3-hover": "#FFFFFF",
+        "pxt-target-stencil3": "#334155",
+
+        "pxt-neutral-background1": "#0B1020",
+        "pxt-neutral-foreground1": "rgba(248,250,252,.92)",
+        "pxt-neutral-background1-hover": "#111827",
+        "pxt-neutral-foreground1-hover": "#FFFFFF",
+        "pxt-neutral-stencil1": "rgba(148,163,184,0.15)",
+
+        "pxt-neutral-background2": "#111827",
+        "pxt-neutral-foreground2": "rgba(248,250,252,.92)",
+        "pxt-neutral-background2-hover": "#172033",
+        "pxt-neutral-foreground2-hover": "#FFFFFF",
+        "pxt-neutral-stencil2": "#273449",
+
+        "pxt-neutral-background3": "#172033",
+        "pxt-neutral-foreground3": "#F8FAFC",
+        "pxt-neutral-background3-hover": "#273449",
+        "pxt-neutral-foreground3-hover": "#FFFFFF",
+        "pxt-neutral-stencil3": "#334155",
+        "pxt-neutral-background3-alpha90": "#172033E6",
+
+        "pxt-neutral-base": "rgba(248,250,252,1)",
+        "pxt-neutral-alpha0": "rgba(248,250,252,0)",
+        "pxt-neutral-alpha10": "rgba(248,250,252,0.1)",
+        "pxt-neutral-alpha20": "rgba(248,250,252,0.2)",
+        "pxt-neutral-alpha50": "rgba(248,250,252,0.5)",
+        "pxt-neutral-alpha80": "rgba(248,250,252,0.8)",
+
+        "pxt-link": "#818CF8",
+        "pxt-link-hover": "#A5B4FC",
+        "pxt-focus-border": "#6366F1",
+
+        "pxt-success": "#22C55E",
+        "pxt-pxt-success-foreground": "#FFFFFF",
+        "pxt-pxt-success-hover": "#16A34A",
+        "pxt-pxt-success-alpha10": "#22C55E19",
+
+        "pxt-warning": "#F59E0B",
+        "pxt-warning-foreground": "#0B1020",
+        "pxt-warning-hover": "#D97706",
+        "pxt-warning-alpha10": "#F59E0B19",
+
+        "pxt-error": "#EF4444",
+        "pxt-error-foreground": "#FFFFFF",
+        "pxt-error-hover": "#DC2626",
+        "pxt-error-alpha10": "#EF444419",
+
+        "pxt-colors-purple-background": "#8B5CF6",
+        "pxt-colors-purple-foreground": "#FFFFFF",
+        "pxt-colors-purple-hover": "#7C3AED",
+        "pxt-colors-purple-alpha10": "#8B5CF619",
+
+        "pxt-colors-orange-background": "#F97316",
+        "pxt-colors-orange-foreground": "#FFFFFF",
+        "pxt-colors-orange-hover": "#EA580C",
+        "pxt-colors-orange-alpha10": "#F9731619",
+
+        "pxt-colors-brown-background": "#92400E",
+        "pxt-colors-brown-foreground": "#FFFFFF",
+        "pxt-colors-brown-hover": "#78350F",
+        "pxt-colors-brown-alpha10": "#92400E19",
+
+        "pxt-colors-blue-background": "#3B82F6",
+        "pxt-colors-blue-foreground": "#FFFFFF",
+        "pxt-colors-blue-hover": "#2563EB",
+        "pxt-colors-blue-alpha10": "#3B82F619",
+
+        "pxt-colors-green-background": "#22C55E",
+        "pxt-colors-green-foreground": "#FFFFFF",
+        "pxt-colors-green-hover": "#16A34A",
+        "pxt-colors-green-alpha10": "#22C55E19",
+
+        "pxt-colors-red-background": "#EF4444",
+        "pxt-colors-red-foreground": "#FFFFFF",
+        "pxt-colors-red-hover": "#DC2626",
+        "pxt-colors-red-alpha10": "#EF444419",
+
+        "pxt-colors-teal-background": "#14B8A6",
+        "pxt-colors-teal-foreground": "#FFFFFF",
+        "pxt-colors-teal-hover": "#0D9488",
+        "pxt-colors-teal-alpha10": "#14B8A619",
+
+        "pxt-colors-yellow-background": "#EAB308",
+        "pxt-colors-yellow-foreground": "#0B1020",
+        "pxt-colors-yellow-hover": "#CA8A04",
+        "pxt-colors-yellow-alpha10": "#EAB30819"
+    }
+}
