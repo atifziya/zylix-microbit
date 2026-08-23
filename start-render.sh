@@ -1,3 +1,5 @@
+@'
 #!/bin/sh
 cd pxt
-pxt serve --port $PORT
+node built/cli.js serve --port "$PORT"
+'@ | Set-Content .\start-render.sh
