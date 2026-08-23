@@ -1,2 +1,2 @@
 #!/bin/sh
-node pxt/built/cli.js serve --port "$PORT"
+node pxt/pxt-cli/cli.js serve --port "$PORT"
