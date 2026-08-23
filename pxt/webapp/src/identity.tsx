@@ -1,0 +1,212 @@
+/// <reference path="../../localtypings/react.d.ts" />
+
+import * as React from "react";
+import * as sui from "./sui";
+import * as auth from "./auth";
+import * as data from "./data";
+import * as cloud from "./cloud";
+import { SignInModal } from "../../react-common/components/profile/SignInModal";
+
+import ISettingsProps = pxt.editor.ISettingsProps;
+import UserInfo = pxt.editor.UserInfo;
+
+export type LoginDialogProps = ISettingsProps & {};
+
+export type LoginDialogState = {
+  visible?: boolean;
+  continuationHash?: string;
+  dialogMessages?: {
+    signInMessage?: string;
+    signUpMessage?: string;
+  };
+};
+
+export class LoginDialog extends auth.Component<
+  LoginDialogProps,
+  LoginDialogState
+> {
+  constructor(props: any) {
+    super(props);
+
+    this.state = {
+      visible: false,
+      continuationHash: "",
+      dialogMessages: {},
+    };
+  }
+
+  public async show(
+    continuationHash?: string,
+    dialogMessages?: { signInMessage?: string; signUpMessage?: string },
+  ) {
+    this.setState({ visible: true, continuationHash, dialogMessages });
+  }
+
+  public hide = () => {
+    this.setState({ visible: false });
+  };
+
+  private signInAsync = async (
+    provider: pxt.AppCloudProvider,
+    rememberMe: boolean,
+  ): Promise<void> => {
+    pxt.tickEvent(`identity.loginClick`, {
+      provider: provider.name,
+      rememberMe: rememberMe.toString(),
+    });
+    await auth.loginAsync(provider.id, rememberMe, {
+      hash: this.state.continuationHash,
+      params: pxt.Util.parseQueryString(window.location.search),
+    });
+  };
+
+  renderCore() {
+    const { visible, dialogMessages } = this.state;
+    const lastUsedIdentityProvider = auth.lastUsedIdentityProviderId();
+
+    return (
+      <>
+        {visible && (
+          <SignInModal
+            onClose={this.hide}
+            onSignIn={this.signInAsync}
+            dialogMessages={dialogMessages}
+            lastUsedIdentityProvider={lastUsedIdentityProvider}
+          />
+        )}
+      </>
+    );
+  }
+}
+
+export type UserMenuProps = ISettingsProps & {
+  continuationHash?: string;
+};
+
+type UserMenuState = {};
+
+export class UserMenu extends auth.Component<UserMenuProps, UserMenuState> {
+  dropdown: sui.DropdownMenu;
+
+  constructor(props: UserMenuProps) {
+    super(props);
+    this.state = {};
+  }
+
+  handleDropdownClicked = () => {
+    const loggedIn = this.isLoggedIn();
+    const githubUser = this.getData("github:user") as UserInfo;
+
+    if (loggedIn || githubUser) {
+      return true;
+    } else {
+      this.props.parent.showLoginDialog(this.props.continuationHash);
+      return false;
+    }
+  };
+
+  handleLoginClicked = () => {
+    this.props.parent.showLoginDialog(this.props.continuationHash);
+  };
+
+  handleLogoutClicked = async () => {
+    await auth.logoutAsync();
+  };
+
+  handleProfileClicked = () => {
+    this.props.parent.showProfileDialog();
+  };
+
+  handleUnlinkGitHubClicked = () => {
+    pxt.tickEvent("menu.github.signout");
+    this.hide();
+    this.props.parent.signOutGithub();
+  };
+
+  encodedAvatarPic(user: pxt.auth.UserProfile): string {
+    const type = user?.idp?.picture?.mimeType;
+    const encodedImg = user?.idp?.picture?.encoded;
+    return type && encodedImg ? `data:${type};base64,${encodedImg}` : "";
+  }
+
+  avatarPicUrl(): string {
+    const user = this.getUserProfile();
+    return user?.idp?.pictureUrl ?? this.encodedAvatarPic(user);
+  }
+
+  hide() {
+    if (this.dropdown) {
+      this.dropdown.hide();
+    }
+  }
+
+  renderCore() {
+    // Login/User menu disabled in ZylixCode Cloud
+    return <></>;
+  }
+}
+
+export type CloudSaveStatusProps = {
+  headerId: string;
+};
+
+export class CloudSaveStatus extends data.Component<CloudSaveStatusProps, {}> {
+  public static wouldRender(headerId: string): boolean {
+    const cloudMd = cloud.getCloudTempMetadata(headerId);
+    const cloudStatus = cloudMd.cloudStatus();
+    return !!cloudStatus && cloudStatus.value !== "none" && auth.hasIdentity();
+  }
+
+  renderCore() {
+    if (!this.props.headerId) {
+      return null;
+    }
+
+    const cloudMd = this.getData<cloud.CloudTempMetadata>(
+      `${cloud.HEADER_CLOUDSTATE}:${this.props.headerId}`,
+    );
+
+    const cloudStatus = cloudMd.cloudStatus();
+
+    const showCloudButton =
+      !!cloudStatus && cloudStatus.value !== "none" && auth.hasIdentity();
+
+    if (!showCloudButton) {
+      return null;
+    }
+
+    const preparing = cloudStatus.value === "localEdits";
+    const syncing = preparing || cloudStatus.value === "syncing";
+
+    return (
+      <div className="cloudstatusarea">
+        {!syncing && (
+          <sui.Item
+            role="presentation"
+            className={"ui tiny cloudicon xicon " + cloudStatus.icon}
+            title={cloudStatus.tooltip}
+            tabIndex={-1}
+          />
+        )}
+
+        {syncing && (
+          <sui.Item
+            role="presentation"
+            className={
+              "ui tiny inline loader active cloudprogress" +
+              (preparing ? " indeterminate" : "")
+            }
+            title={cloudStatus.tooltip}
+            tabIndex={-1}
+          />
+        )}
+
+        {cloudStatus.value !== "none" && cloudStatus.value !== "synced" && (
+          <span className="ui mobile hide no-select cloudtext" role="note">
+            {cloudStatus.shortStatus}
+          </span>
+        )}
+      </div>
+    );
+  }
+}

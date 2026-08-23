@@ -1,0 +1,213 @@
+/// <reference path="../../built/pxtlib.d.ts" />
+
+import * as React from "react";
+import * as data from "./data";
+import * as sui from "./sui";
+
+import ISettingsProps = pxt.editor.ISettingsProps;
+import { classList } from "../../react-common/components/util";
+
+export interface EditorAccessibilityMenuProps extends ISettingsProps {
+    highContrast?: boolean;
+}
+
+// This Component overrides shouldComponentUpdate, be sure to update that if the state is updated
+export interface EditorAccessibilityMenuState {
+    highContrast?: boolean;
+}
+
+export class EditorAccessibilityMenu extends data.Component<EditorAccessibilityMenuProps, EditorAccessibilityMenuState> {
+
+    constructor(props: EditorAccessibilityMenuProps) {
+        super(props);
+        this.state = {
+        }
+
+        this.openJavaScript = this.openJavaScript.bind(this);
+        this.openPython = this.openPython.bind(this);
+        this.showLanguagePicker = this.showLanguagePicker.bind(this);
+        this.goHome = this.goHome.bind(this);
+        this.openBlocks = this.openBlocks.bind(this);
+    }
+
+    openBlocks(e: React.MouseEvent<HTMLElement>) {
+        this.props.parent.openBlocks();
+    }
+
+    openJavaScript() {
+        pxt.tickEvent("accmenu.editor.openJS", undefined, { interactiveConsent: true });
+        this.props.parent.openJavaScript();
+    }
+
+    openPython() {
+        pxt.tickEvent("accmenu.editor.openPY", undefined, { interactiveConsent: true });
+        this.props.parent.openPython();
+    }
+
+    showLanguagePicker() {
+        pxt.tickEvent("accmenu.editor.importdialog", undefined, { interactiveConsent: true });
+        this.props.parent.showLanguagePicker();
+    }
+
+    goHome() {
+        pxt.tickEvent("accmenu.editor.home", undefined, { interactiveConsent: true });
+        this.props.parent.showExitAndSaveDialog();
+    }
+
+    UNSAFE_componentWillReceiveProps(nextProps: EditorAccessibilityMenuProps) {
+        const newState: EditorAccessibilityMenuState = {};
+        if (nextProps.highContrast != undefined) {
+            newState.highContrast = nextProps.highContrast;
+        }
+        if (Object.keys(newState).length > 0) this.setState(newState)
+    }
+
+    shouldComponentUpdate(nextProps: EditorAccessibilityMenuProps, nextState: EditorAccessibilityMenuState, nextContext: any): boolean {
+        return this.state.highContrast != nextState.highContrast;
+    }
+
+    renderCore() {
+        const targetTheme = pxt.appTarget.appTheme;
+        const hasHome = !pxt.shell.isControllerMode();
+
+        const menuClass = classList(targetTheme.invertedMenu && "inverted", "menu");
+
+        return <nav className="ui accessibleMenu borderless fixed menu" aria-label="Skip links">
+            <sui.Item
+                className={menuClass}
+                role="button"
+                icon="xicon blocks"
+                text={lf("Skip to Blocks workspace")}
+                onClick={this.openBlocks}
+            />
+
+            <sui.Item
+                className={menuClass}
+                role="button"
+                icon="xicon js"
+                text={lf("Skip to JavaScript editor")}
+                onClick={this.openJavaScript}
+            />
+
+            {targetTheme.python &&
+                <sui.Item
+                    className={menuClass}
+                    role="button"
+                    icon="xicon python"
+                    text={lf("Skip to Python editor")}
+                    onClick={this.openPython}
+                />
+            }
+
+            {targetTheme.selectLanguage &&
+                <sui.Item
+                    className={menuClass}
+                    role="button"
+                    icon="xicon globe"
+                    text={lf("Select Language")}
+                    onClick={this.showLanguagePicker}
+                    ariaHasPopup="dialog"
+                />
+            }
+
+            {hasHome &&
+                <sui.Item
+                    className={menuClass}
+                    role="button"
+                    icon="home"
+                    text={lf("Go Home")}
+                    onClick={this.goHome}
+                />
+            }
+        </nav>;
+    }
+}
+
+export interface HomeAccessibilityMenuProps extends ISettingsProps {
+    highContrast: boolean;
+}
+
+// This Component overrides shouldComponentUpdate, be sure to update that if the state is updated
+export interface HomeAccessibilityMenuState {
+    highContrast?: boolean;
+}
+
+export class HomeAccessibilityMenu extends data.Component<HomeAccessibilityMenuProps, HomeAccessibilityMenuState> {
+
+    constructor(props: HomeAccessibilityMenuProps) {
+        super(props);
+        this.state = {
+        }
+
+        this.newProject = this.newProject.bind(this);
+        this.importProjectDialog = this.importProjectDialog.bind(this);
+        this.showLanguagePicker = this.showLanguagePicker.bind(this);
+    }
+
+    async newProject(): Promise<void> {
+        pxt.tickEvent("accmenu.home.new", undefined, { interactiveConsent: true });
+        const headers = this.getData(`headers:`);
+        const firstProject = (!headers || headers?.length == 0);
+        return this.props.parent.newUserCreatedProject(firstProject)
+    }
+
+    importProjectDialog() {
+        pxt.tickEvent("accmenu.home.importdialog", undefined, { interactiveConsent: true });
+        this.props.parent.importProjectDialog();
+    }
+
+    showLanguagePicker() {
+        pxt.tickEvent("accmenu.home.langpicker");
+        this.props.parent.showLanguagePicker();
+    }
+
+    UNSAFE_componentWillReceiveProps(nextProps: HomeAccessibilityMenuProps) {
+        const newState: HomeAccessibilityMenuState = {};
+        if (nextProps.highContrast != undefined) {
+            newState.highContrast = nextProps.highContrast;
+        }
+        if (Object.keys(newState).length > 0) this.setState(newState)
+    }
+
+    shouldComponentUpdate(nextProps: HomeAccessibilityMenuProps, nextState: HomeAccessibilityMenuState, nextContext: any): boolean {
+        return this.state.highContrast != nextState.highContrast;
+    }
+
+    renderCore() {
+        const { highContrast } = this.state;
+        const targetTheme = pxt.appTarget.appTheme;
+
+        return <nav className="ui accessibleMenu borderless fixed menu" aria-label="Skip links">
+
+            <sui.Item
+                className={`${targetTheme.invertedMenu ? `inverted` : ''} menu`}
+                role="button"
+                icon="add circle"
+                text={lf("New Project")}
+                ariaHasPopup="dialog"
+                onClick={this.newProject}
+            />
+
+            <sui.Item
+                className={`${targetTheme.invertedMenu ? `inverted` : ''} menu`}
+                role="button"
+                icon="upload"
+                text={lf("Import Project")}
+                ariaHasPopup="dialog"
+                onClick={this.importProjectDialog}
+            />
+
+            {targetTheme.selectLanguage
+                ? <sui.Item
+                    className={`${targetTheme.invertedMenu ? `inverted` : ''} menu`}
+                    role="button"
+                    icon="xicon globe"
+                    text={lf("Select Language")}
+                    ariaHasPopup="dialog"
+                    onClick={this.showLanguagePicker}
+                />
+                : undefined}
+
+        </nav>;
+    }
+}
